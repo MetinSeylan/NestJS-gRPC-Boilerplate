@@ -1,0 +1,20 @@
+syntax = "proto3";
+
+package com.user.v1;
+
+service UserService {
+  rpc Create(User) returns (User);
+  rpc FindOne(FindOneRequest) returns (User);
+  rpc ListAll(ListAllRequest) returns (stream User);
+}
+
+message FindOneRequest {
+  string id = 1;
+}
+
+message User {
+  string id = 1;
+  string name = 2;
+}
+
+message ListAllRequest {}

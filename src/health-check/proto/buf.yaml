@@ -1,0 +1,9 @@
+version: v1
+lint:
+  ignore:
+    - grpc
+  use:
+    - DEFAULT
+breaking:
+  use:
+    - FILE

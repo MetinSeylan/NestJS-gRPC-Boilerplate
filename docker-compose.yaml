@@ -1,0 +1,14 @@
+version: "3.9"
+services:
+  app:
+    build: .
+    ports:
+      - "50001:50001"
+    environment:
+      PROFILE: "TEST"
+      FIRESTORE_HOST: "firestore-emulator:8080"
+    links:
+      - firestore-emulator
+  firestore-emulator:
+    image: gcr.io/google.com/cloudsdktool/cloud-sdk:emulators
+    command: gcloud beta emulators firestore start --host-port=0.0.0.0:8080
