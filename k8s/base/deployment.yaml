@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nestjs-grpc-deployment
+  labels:
+    app: nestjs-grpc-deployment
+spec:
+  selector:
+    matchLabels:
+      app: nestjs-grpc-deployment
+  template:
+    metadata:
+      labels:
+        app: nestjs-grpc-deployment
+    spec:
+      containers:
+        - name: nestjs-grpc
+          image: app
+          ports:
+            - containerPort: 50001
+          env:
+            - name: APP_NAME
+              value: "NestJS gRPC Boilerplate"

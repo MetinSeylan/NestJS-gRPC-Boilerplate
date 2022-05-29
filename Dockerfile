@@ -7,9 +7,13 @@ RUN npm ci
 RUN npm run build:protoc
 RUN npm run build
 
+FROM node:16.15.0-alpine
 
-FROM gcr.io/distroless/nodejs:16
+RUN GRPC_HEALTH_PROBE_VERSION=v0.3.1 && \
+    wget -qO/bin/grpc_health_probe https://github.com/grpc-ecosystem/grpc-health-probe/releases/download/${GRPC_HEALTH_PROBE_VERSION}/grpc_health_probe-linux-amd64 && \
+    chmod +x /bin/grpc_health_probe
+
 COPY --from=build-env /app/node_modules /app/node_modules
 COPY --from=build-env /app/dist /app/dist
 WORKDIR /app
-CMD ["dist/main.js"]
+CMD ["node", "dist/main.js"]

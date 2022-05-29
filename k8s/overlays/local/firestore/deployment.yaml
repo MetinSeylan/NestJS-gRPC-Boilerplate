@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: firestore-emulator-deployment
+  labels:
+    app: firestore-emulator-deployment
+spec:
+  selector:
+    matchLabels:
+      app: firestore-emulator-deployment
+  template:
+    metadata:
+      labels:
+        app: firestore-emulator-deployment
+    spec:
+      containers:
+        - name: firestore-emulator
+          image: gcr.io/google.com/cloudsdktool/cloud-sdk:emulators
+          ports:
+            - containerPort: 8080
+          command: ['gcloud', 'beta', 'emulators', 'firestore', 'start', '--host-port=0.0.0.0:8080']

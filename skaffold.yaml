@@ -1,0 +1,26 @@
+apiVersion: skaffold/v2beta28
+kind: Config
+metadata:
+  name: nestjs-grpc-boilerplate
+build:
+  artifacts:
+  - image: nestjs-grpc-deployment
+    context: .
+  local:
+    push: false
+deploy:
+  kustomize:
+    paths:
+    - k8s/base
+profiles:
+- name: local
+  deploy:
+    kustomize:
+      paths:
+      - k8s/overlays/local
+portForward:
+  - resourceType: service
+    resourceName: nestjs-grpc-service
+    namespace: default
+    port: 80
+    localPort: 3000
