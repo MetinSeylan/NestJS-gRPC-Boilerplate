@@ -1,6 +1,12 @@
 FROM node:16.15.0-alpine as build-env
 
-COPY . ./app
+COPY ./src ./app/src
+COPY ./package-lock.json ./app/package-lock.json
+COPY ./package.json ./app/package.json
+COPY ./tsconfig.json ./app/tsconfig.json
+COPY ./tsconfig.build.json ./app/tsconfig.build.json
+COPY ./nest-cli.json ./app/nest-cli.json
+
 WORKDIR /app
 
 RUN npm ci

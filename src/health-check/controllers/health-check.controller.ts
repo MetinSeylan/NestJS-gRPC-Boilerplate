@@ -7,8 +7,18 @@ export class HealthCheckController {
   /**
    * mock response for now
    */
-  @GrpcMethod('HealthService', 'Check')
+  @GrpcMethod('Health', 'Check')
   public async check(): Promise<grpc.health.v1.HealthCheckResponse> {
+    return {
+      status: grpc.health.v1.HealthCheckResponse.ServingStatus.SERVING,
+    };
+  }
+
+  /**
+   * mock response for now
+   */
+  @GrpcMethod('Health', 'Watch')
+  public async watch(): Promise<grpc.health.v1.HealthCheckResponse> {
     return {
       status: grpc.health.v1.HealthCheckResponse.ServingStatus.SERVING,
     };

@@ -5,6 +5,8 @@ metadata:
 build:
   artifacts:
   - image: nestjs-grpc-deployment
+    docker:
+      dockerfile: Dockerfile.local
     context: .
   local:
     push: false

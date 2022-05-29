@@ -18,6 +18,14 @@ spec:
           image: app
           ports:
             - containerPort: 50001
+          readinessProbe:
+            exec:
+              command: [ "/bin/grpc_health_probe", "-addr=0.0.0.0:50001" ]
+            initialDelaySeconds: 5
+          livenessProbe:
+            exec:
+              command: [ "/bin/grpc_health_probe", "-addr=0.0.0.0:50001" ]
+            initialDelaySeconds: 10
           env:
             - name: APP_NAME
               value: "NestJS gRPC Boilerplate"
